@@ -91,7 +91,7 @@ const Board = () => {
       alignItems: 'center',
       justifyContent: 'space-between',
       paddingTop: '20px',
-      paddingBottom: '22px',
+      paddingBottom: '15px',
     },
     title: {
       fontWeight: 'bold',
@@ -310,7 +310,7 @@ const Board = () => {
   }
   
   return (
-    <div style={{height: '93vh', marginTop: '60px'}}>
+    <div style={{height: '93vh', marginTop: '50px'}}>
       <DragDropContext onDragEnd={handleOnDragEnd}>
           <div style={BoardStyle.leftSide}>
             <p style={BoardStyle.title}>{boardTitle}</p>
