@@ -351,7 +351,7 @@ const Board = () => {
                 </div>
           </div>
         </div>
-        <div>
+        <div style={{overflowX: 'auto', overflowY: 'hidden'}}>
           <Droppable droppableId="board" type="list" direction="horizontal">
             {(provided) => (
               <div
