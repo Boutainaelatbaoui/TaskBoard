@@ -65,7 +65,7 @@ function Sidebar({ showSidebar, setShowSideBar }) {
               
             </div>
           <div style={{
-            marginTop: 25,
+            marginTop: 40,
             paddingLeft: 20,
             paddingRight: 15,
             paddingBottom: 10,
@@ -75,7 +75,7 @@ function Sidebar({ showSidebar, setShowSideBar }) {
             color: '#FFF',
           }}>
             <div style={{display: 'flex', alignItems: 'center', gap: '5px'}}>
-              <img src="/images/icons8-dashboard-32.png" alt="My Image" style={{ maxWidth: '18px', maxHeight: '18px', marginRight: '8px' }}/>
+              <img src="/images/icons8-dashboard-32.png" alt="My Image" style={{ maxWidth: '20px', maxHeight: '20px', marginRight: '8px' }}/>
               <p>Boards</p>
             </div>
             <AddIcon sx={{
@@ -91,7 +91,40 @@ function Sidebar({ showSidebar, setShowSideBar }) {
               return (
                 <li key={index} className={item.cName}>
                   <Link to={item.path}>
-                    {item.icon}
+                    <img src="/images/icons8-project-24 (1).png" alt="My Image" style={{ maxWidth: '20px', maxHeight: '20px'}}/>
+                    <span>{item.title}</span>
+                  </Link>
+                </li>
+              )
+            })}
+          <div style={{
+            marginTop: 25,
+            paddingLeft: 20,
+            paddingRight: 15,
+            paddingBottom: 10,
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            color: '#FFF',
+          }}>
+            <div style={{display: 'flex', alignItems: 'center', gap: '5px'}}>
+              <img src="/images/icons8-team-30 (1).png" alt="My Image" style={{ maxWidth: '20px', maxHeight: '20px', marginRight: '8px' }}/>
+              <p>Teams</p>
+            </div>
+            <AddIcon sx={{
+              '&:hover': {
+                backgroundColor: '#112162',
+                borderRadius: 1,
+                cursor: 'pointer'
+              }
+            }} onClick={() => setOpenPopup(true)}/>
+          </div>
+          {SidebarItems.filter((item) => item.title.toLowerCase().includes(searched.toLowerCase()))
+            .map((item, index) => {
+              return (
+                <li key={index} className={item.cName}>
+                  <Link to={item.path}>
+                    <img src="/images/icons8-project-24 (1).png" alt="My Image" style={{ maxWidth: '18px', maxHeight: '18px'}}/>
                     <span>{item.title}</span>
                   </Link>
                 </li>
