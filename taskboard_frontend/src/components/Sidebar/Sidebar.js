@@ -68,12 +68,16 @@ function Sidebar({ showSidebar, setShowSideBar }) {
             marginTop: 25,
             paddingLeft: 20,
             paddingRight: 15,
+            paddingBottom: 10,
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'space-between',
             color: '#FFF',
           }}>
-            <p>Your boards</p>
+            <div style={{display: 'flex', alignItems: 'center', gap: '5px'}}>
+              <img src="/images/icons8-dashboard-32.png" alt="My Image" style={{ maxWidth: '18px', maxHeight: '18px', marginRight: '8px' }}/>
+              <p>Boards</p>
+            </div>
             <AddIcon sx={{
               '&:hover': {
                 backgroundColor: '#112162',
