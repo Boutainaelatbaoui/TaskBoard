@@ -91,7 +91,7 @@ const Board = () => {
       alignItems: 'center',
       justifyContent: 'space-between',
       paddingTop: '20px',
-      paddingBottom: '15px',
+      paddingBottom: '22px',
     },
     title: {
       fontWeight: 'bold',
@@ -103,7 +103,7 @@ const Board = () => {
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
     },
     separator: {
       height: 18, borderRight: '1px solid #a6a6a6', marginRight: 7
@@ -115,7 +115,7 @@ const Board = () => {
     historyButton: {
       transition: 'background-color 100ms',
       color: "#FFF",
-      backgroundColor: '#1976D2',
+      backgroundColor: '#294db6',
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
@@ -130,14 +130,12 @@ const Board = () => {
       }
     },
     rightSide: {
-      width: '28%',
       marginRight: '20px',
-      marginLeft: '15px',
+      marginLeft: '22px',
       display: 'flex',
-      flexDirection: 'row',
       alignItems: 'center',
       paddingBottom: '20px',
-      gap: '20px',
+      justifyContent: 'space-between',
     }
   };
   
@@ -312,7 +310,7 @@ const Board = () => {
   }
   
   return (
-    <div style={{height: '93vh', overflowY: 'auto', overflowX: 'auto', marginTop: '60px'}}>
+    <div style={{height: '93vh', marginTop: '60px'}}>
       <DragDropContext onDragEnd={handleOnDragEnd}>
           <div style={BoardStyle.leftSide}>
             <p style={BoardStyle.title}>{boardTitle}</p>
@@ -323,22 +321,36 @@ const Board = () => {
                 ))}
               </div>
               {/*Share*/}
-              <Button variant='contained' sx={{ paddingLeft: 1, paddingRight: 1, marginLeft: 1, fontSize: '0.8rem' }}
+              <Button variant='contained' sx={{ padding: '0.5rem 1rem', marginLeft: 0.7, fontSize: '0.8rem', borderRadius: '1rem', backgroundColor: '#315fe9' }}
                       onClick={() => setOpenPopup(true)}>
-                <PersonAddAltIcon sx={{ fontSize: 18, marginRight: 0.5 }}/> Add Members
+                <img src="/images/icons8-user-90.png" alt="My Image" style={{ maxWidth: '18px', maxHeight: '18px', marginRight: '8px' }}/> Add Member
               </Button>
             </div>
           </div>
         <div style={BoardStyle.rightSide} className='rightSide'>
+          <div style={BoardStyle.members}>
+            <div className='membersAvatars' style={BoardStyle.membersAvatars}>
+              {invitedMembers.map((member) => (
+                <UserAvatar key={member.name} name={member.name} color={member.color}/>
+              ))}
+            </div>
+            {/*Share with teams*/}
+            <Button variant='contained' sx={{ padding: '0.5rem 1rem', marginLeft: 0.7, fontSize: '0.8rem', borderRadius: '1rem', backgroundColor: '#315fe9' }}
+                    onClick={() => setOpenPopup(true)}>
+              <img src="/images/icons8-team-48.png" alt="My Image" style={{ maxWidth: '18px', maxHeight: '18px', marginRight: '8px' }}/> Add Team
+            </Button>
+          </div>
+          <div style={{ ...BoardStyle.members, gap: '14px' }}>
             {/*filter*/}
             <PositionedPopper searched={searched} setSearched={setSearched} invitedMembers={invitedMembers}
-                              filteredCards={filteredCards} boardLists={boardLists}/>
-            {/*// Show menu button*/}
-            <div style={BoardStyle.historyButton} className="historyButton"
-                onClick={() => setShowRightSideBar(!showRightSidebar)}>
-              <MenuOpenIcon sx={{ fontSize: 18, marginRight: 1 }}/> Show Activities
-            </div>
+                                  filteredCards={filteredCards} boardLists={boardLists}/>
+                {/*// Show menu button*/}
+                <div style={BoardStyle.historyButton} className="historyButton"
+                    onClick={() => setShowRightSideBar(!showRightSidebar)}>
+                  <MenuOpenIcon sx={{ fontSize: 18, marginRight: 1 }}/> Show Activities
+                </div>
           </div>
+        </div>
         <div>
           <Droppable droppableId="board" type="list" direction="horizontal">
             {(provided) => (

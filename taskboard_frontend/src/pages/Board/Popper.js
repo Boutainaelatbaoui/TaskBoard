@@ -45,7 +45,7 @@ export default function PositionedPopper({searched, setSearched, invitedMembers,
       <Grid container justifyContent="center">
         <Grid item>
           {/*filter button*/}
-          <Button onClick={handleClick('bottom')} className='filterButton'>{filterNumbers === 0 ? null : filterNumbers}<SortIcon style={{marginRight: '8px'}} />Filter</Button>
+          <Button onClick={handleClick('bottom')} className='filterButton' style={{color: '#294db6',}}>{filterNumbers === 0 ? null : filterNumbers}<SortIcon style={{marginRight: '8px'}} />Filter</Button>
         </Grid>
       </Grid>
     </Box>
