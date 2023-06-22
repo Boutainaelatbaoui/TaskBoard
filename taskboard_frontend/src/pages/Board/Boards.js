@@ -331,14 +331,16 @@ const deleteGroups = async (id) => {
                     key={group._id}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    <TableCell component="th" scope="row">
-                      <div style={{display: 'flex', gap: '10px', alignItems: 'center'}}>
-                          <Avatar style={{ backgroundColor: avatarColors[group.color], color: '#FFFFFF'}}>
-                              <GroupsIcon />
-                          </Avatar>
-                        <div>{group.name}</div>
-                      </div>
-                    </TableCell>
+                    <Link to={`/group/${group._id}`} style={{textDecoration: 'none', color: 'black'}}>
+                      <TableCell component="th" scope="row">
+                        <div style={{display: 'flex', gap: '10px', alignItems: 'center'}}>
+                            <Avatar style={{ backgroundColor: avatarColors[group.color], color: '#FFFFFF'}}>
+                                <GroupsIcon />
+                            </Avatar>
+                          <div>{group.name}</div>
+                        </div>
+                      </TableCell>
+                    </Link>
                     <TableCell
                       align="center"                      
                     >
@@ -416,9 +418,11 @@ const deleteGroups = async (id) => {
                     key={board._id}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    <TableCell component="th" scope="row" onClick={() => handleOnClickRow(index)} >
-                      {board.name}
-                    </TableCell>
+                    <Link to={`/taskboard/${board._id}`} style={{textDecoration: 'none', color: 'black'}}>
+                      <TableCell component="th" scope="row">
+                          {board.name}
+                      </TableCell>
+                    </Link>
                     <TableCell
                       onClick={() => handleOnClickRow(board._id)}
                       align="center"
