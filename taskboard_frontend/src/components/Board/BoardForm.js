@@ -83,6 +83,7 @@ function BoardForm({ recordUpdate, openPopup, setOpenPopup }) {
         name: 'Done',
         board_id: newBoard.data._id
       });
+      Swal.fire("Success", "Board added successfully!", "success");
     } catch (err) {
       console.log(err);
     }

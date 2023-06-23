@@ -389,11 +389,11 @@ const Header = () => {
               </>
             ) : (
               <Box>
-                <Button onClick={() => navigate("/login")}>
+                <Button onClick={() => navigate("/login")} style={{color: 'white'}}>
                   Login
                 </Button>
                 
-                <Button onClick={() => navigate("/register")}>
+                <Button onClick={() => navigate("/register")} style={{color: 'white'}}>
                   Register
                 </Button>
               </Box>
