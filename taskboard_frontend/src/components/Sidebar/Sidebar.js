@@ -9,13 +9,11 @@ import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrow
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import Popup from "../../pages/Board/Popup";
 import BoardForm from "../Board/BoardForm";
-import GroupForm from "../Group/GroupForm";
 import { useSelector } from "react-redux";
 import './sidebar.css';
 
 function Sidebar({ showSidebar, setShowSideBar }) {
   const [listBoards, setListBoards] = useState([]);
-  const [listGroups, setListGroups] = useState([]);
   const [searched, setSearched] = useState("");
   const [recordUpdate, setRecordUpdate] = useState("");
   const [openGroupForm, setOpenGroupForm] = useState(false);
@@ -41,33 +39,16 @@ function Sidebar({ showSidebar, setShowSideBar }) {
       console.log(err);
     }
   };
-
-  const getListGroups = async () => {
-    try {
-      const b = await axios.get("http://localhost:3001/group", config);
-      setListGroups(b.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
   
   useEffect(() => {
     getListBoards();
-    getListGroups();
-  }, [listBoards, listGroups]);
+  }, [listBoards]);
   
   const SidebarItems = listBoards.map((list, index) => ({
     id: index,
     title: list.name,
     icon: <DashboardIcon/>,
     path: `taskboard/${list._id}`,
-      cName: 'side-text'
-  }));
-
-  const SidebarGroups = listGroups.map((list, index) => ({
-    id: index,
-    title: list.name,
-    path: `group/${list._id}`,
       cName: 'side-text'
   }));
   
@@ -117,39 +98,6 @@ function Sidebar({ showSidebar, setShowSideBar }) {
                 </li>
               )
             })}
-          <div style={{
-            marginTop: 25,
-            paddingLeft: 20,
-            paddingRight: 15,
-            paddingBottom: 10,
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            color: '#FFF',
-          }}>
-            <div style={{display: 'flex', alignItems: 'center', gap: '5px'}}>
-              <img src="/images/icons8-team-30 (1).png" alt="My Image" style={{ maxWidth: '20px', maxHeight: '20px', marginRight: '8px' }}/>
-              <p>Teams</p>
-            </div>
-            <AddIcon sx={{
-              '&:hover': {
-                backgroundColor: '#112162',
-                borderRadius: 1,
-                cursor: 'pointer'
-              }
-            }} onClick={() => setOpenGroupForm(true)}/>
-          </div>
-          {SidebarGroups.filter((item) => item.title.toLowerCase().includes(searched.toLowerCase()))
-            .map((item, index) => {
-              return (
-                <li key={index} className={item.cName}>
-                  <Link to={item.path}>
-                    <img src="/images/icons8-team-48.png" alt="My Image" style={{ maxWidth: '18px', maxHeight: '18px'}}/>
-                    <span>{item.title}</span>
-                  </Link>
-                </li>
-              )
-            })}
         </ul>
       </nav>
       <Popup
@@ -162,19 +110,6 @@ function Sidebar({ showSidebar, setShowSideBar }) {
         <BoardForm
           openPopup={openPopup}
           setOpenPopup={setOpenPopup}
-          recordUpdate={recordUpdate}
-        />
-      </Popup>
-      <Popup
-        openPopup={openGroupForm}
-        setOpenPopup={setOpenGroupForm}
-        setRecordUpdate={setRecordUpdate}
-        recordUpdate={recordUpdate}
-        title={"New Group"}
-      >
-        <GroupForm
-          openPopup={openGroupForm}
-          setOpenPopup={setOpenGroupForm}
           recordUpdate={recordUpdate}
         />
       </Popup>
