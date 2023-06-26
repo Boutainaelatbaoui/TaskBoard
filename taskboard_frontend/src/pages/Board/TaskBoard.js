@@ -25,9 +25,11 @@ const Board = () => {
   const [boardTitle, setBoardTitle] = useState("");
   const [recordUpdate, setRecordUpdate] = useState("");
   const [openPopup, setOpenPopup] = useState(false);
+  const [openTeamPopup, setOpenTeamPopup] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [showRightSidebar, setShowRightSideBar] = useState(false);
   const [allMembers, setAllMembers] = useState([]);
+  const [allGroups, setAllGroups] = useState([]);
   const [invitedMembers, setInvitedMembers] = useState([]);
   const [searched, setSearched] = useState({ search: "", members: [], dateRange: [null, null] });
   const [filteredCards, setFilteredCards] = useState([]);
@@ -258,6 +260,26 @@ const Board = () => {
         Member.splice(index, 1);
       }
       setAllMembers(Member);
+      console.log(Member);
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  // get Groups
+  const getAllGroups = async () => {
+    if (!user) return;
+    const token = user.token;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+    try {
+      // get All groups
+      const response1 = await axios.get("http://localhost:3001/group", config);
+      const Group = response1.data.map((group) => ({ _id: group._id, name: group.name}));
+      setAllGroups(Group);
+      console.log(Group);
     } catch (err) {
       console.log(err)
     }
@@ -282,6 +304,7 @@ const Board = () => {
     setTimeout(() => {
       getSingleBoard();
       getAllMembers();
+      getAllGroups();
       setIsLoading(false);
     }, 300);
   }, [id]);
@@ -336,7 +359,7 @@ const Board = () => {
             </div>
             {/*Share with teams*/}
             <Button variant='contained' sx={{ padding: '0.5rem 1rem', marginLeft: 0.7, fontSize: '0.8rem', borderRadius: '1rem', backgroundColor: '#315fe9' }}
-                    onClick={() => setOpenPopup(true)}>
+                    onClick={() => setOpenTeamPopup(true)}>
               <img src="/images/icons8-team-48.png" alt="My Image" style={{ maxWidth: '18px', maxHeight: '18px', marginRight: '8px' }}/> Add Team
             </Button>
           </div>
@@ -408,20 +431,18 @@ const Board = () => {
       </Popup>
 
       <Popup
-        openPopup={openPopup}
-        setOpenPopup={setOpenPopup}
+        openPopup={openTeamPopup}
+        setOpenPopup={setOpenTeamPopup}
         setRecordUpdate={setRecordUpdate}
-        recordUpdate={recordUpdate}
         title={"Share this board with other members"}
       >
         <InviteGroup
-          allMembers={allMembers}
-          setAllMembers={setAllMembers}
+          allGroups={allGroups}
+          setAllGroups={setAllGroups}
+          openTeamPopup={openTeamPopup}
+          setOpenTeamPopup={setOpenTeamPopup}
           invitedMembers={invitedMembers}
           setInvitedMembers={setInvitedMembers}
-          openPopup={openPopup}
-          setOpenPopup={setOpenPopup}
-          recordUpdate={recordUpdate}
           user={user}
           boardId={id}
           boardName={boardTitle}

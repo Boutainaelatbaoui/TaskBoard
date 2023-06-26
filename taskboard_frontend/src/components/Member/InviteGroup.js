@@ -45,9 +45,9 @@ const styles = {
 };
 
 export default function InviteGroup({
-  openPopup,
-  setOpenPopup,
-  allMembers,
+  openTeamPopup,
+  setOpenTeamPopup,
+  allGroups,
   invitedMembers,
   setInvitedMembers,
   user,
@@ -106,7 +106,7 @@ export default function InviteGroup({
   
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    const newAllMembers = allMembers;
+    const newAllMembers = allGroups;
     const newInvitedMembers = selectedMembers.map((member) => ({ ...member, role: 'invited' }));
     
     // removing new invited members from all members
@@ -156,7 +156,7 @@ export default function InviteGroup({
         console.log(err)
       }
     }
-    setOpenPopup(!openPopup);
+    setOpenTeamPopup(!openTeamPopup);
   }
   
   // useEffect(() => {
@@ -175,7 +175,7 @@ export default function InviteGroup({
                 multiple
                 id="size-small-outlined-multi"
                 size="small"
-                options={allMembers}
+                options={allGroups}
                 getOptionLabel={(option) => option.name}
                 // defaultValue={[]}
                 renderInput={(params) => (
