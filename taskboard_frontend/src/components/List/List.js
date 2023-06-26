@@ -37,7 +37,7 @@ const List = ({
     setCurrentList(list);
   }, [boardLists]);
 
-  console.log(list);
+  // console.log(list);
   
   return (
     <Draggable draggableId={currentList._id} index={index}>

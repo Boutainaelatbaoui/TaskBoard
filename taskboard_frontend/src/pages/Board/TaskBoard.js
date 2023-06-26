@@ -143,8 +143,6 @@ const Board = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
 
-  console.log(id);
-  
   // getting board data from DB
   const getSingleBoard = async () => {
     if (!user) return;

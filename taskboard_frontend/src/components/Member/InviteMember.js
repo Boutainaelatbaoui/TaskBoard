@@ -137,7 +137,7 @@ export default function InviteMember({
         const data1 = {
           user: newInvitedMembers[i]._id,
           action: "add",
-          board: boardId,
+          board: data.board,
           group: groupId,
           admin: invitedMembers[i]._id,
         }

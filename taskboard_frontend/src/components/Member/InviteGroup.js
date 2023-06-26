@@ -138,9 +138,10 @@ export default function InviteGroup({
           user: newInvitedMembers[i]._id,
           action: "add",
           group: groupId,
+          board: data.board,
           admin: invitedMembers[i]._id,
         }
-        console.log(data1)
+        console.log(data1.board)
         
         if (!user) return;
         const token = user.token;

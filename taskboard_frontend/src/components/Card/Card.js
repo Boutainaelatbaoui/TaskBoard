@@ -70,7 +70,7 @@ const Card = ({ card, index, boardLists, setBoardLists, visibility, list, invite
     return { time: `${days}d ${hours}h ${minutes}m`, status: true, show: days < 3 };
   }
 
-  console.log(currentCard);
+  // console.log(currentCard);
   
   // // delete card
   // const handleOnDelete = async (id) => {
