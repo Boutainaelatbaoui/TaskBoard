@@ -17,6 +17,9 @@ import RightSidebar from "../../components/Sidebar/RightSidebar";
 import UserAvatar from "../../components/avatar/UserAvatar";
 import PositionedPopper from './Popper';
 import { format } from "date-fns";
+import GroupsIcon from '@mui/icons-material/Groups';
+import Avatar from '@mui/material/Avatar';
+import { avatarColors } from '../../data/avatarColors';
 
 const Board = () => {
   // States
@@ -277,7 +280,7 @@ const Board = () => {
     try {
       // get All groups
       const response1 = await axios.get("http://localhost:3001/group", config);
-      const Group = response1.data.map((group) => ({ _id: group._id, name: group.name}));
+      const Group = response1.data.map((group) => ({ _id: group._id, name: group.name, color: group.color}));
       setAllGroups(Group);
       console.log(Group);
     } catch (err) {
@@ -353,8 +356,10 @@ const Board = () => {
         <div style={BoardStyle.rightSide} className='rightSide'>
           <div style={BoardStyle.members}>
             <div className='membersAvatars' style={BoardStyle.membersAvatars}>
-              {invitedMembers.map((member) => (
-                <UserAvatar key={member.name} name={member.name} color={member.color}/>
+              {invitedMembers.map((group) => (
+                <Avatar style={{ backgroundColor: avatarColors[group.color], color: '#FFFFFF'}}>
+                  <GroupsIcon />
+              </Avatar>
               ))}
             </div>
             {/*Share with teams*/}
